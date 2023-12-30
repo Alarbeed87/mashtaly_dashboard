@@ -102,6 +102,7 @@ class _ReportingTableState extends State<ReportingTableScreen> {
                                               child: ReportingDialogContent(
                                                 user_id: post['user_id'],
                                                 post_id: post['id'],
+                                                Saleplant: post['phone_number'],
                                               )),
                                           actions: [
                                             Container(

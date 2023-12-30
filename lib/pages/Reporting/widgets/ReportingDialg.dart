@@ -3,9 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ReportingDialogContent extends StatefulWidget {
-  String? user_id, post_id;
+  String? user_id, post_id, Saleplant;
   ReportingDialogContent(
-      {super.key, required this.user_id, required this.post_id});
+      {super.key,
+      required this.user_id,
+      required this.post_id,
+      required this.Saleplant});
 
   @override
   State<ReportingDialogContent> createState() => _ReportingDialogContentState();
@@ -16,10 +19,11 @@ class _ReportingDialogContentState extends State<ReportingDialogContent> {
   Widget build(BuildContext context) {
     String? user_id = widget.user_id;
     String? post_id = widget.post_id;
+    String? isSale = widget.Saleplant;
     CollectionReference dataFromFire = FirebaseFirestore.instance
-        .collection('posts')
+        .collection(isSale == null ? 'posts' : 'SalePlants')
         .doc(user_id)
-        .collection('Posts');
+        .collection(isSale == null ? 'Posts' : 'SalePlants');
 
     return FutureBuilder<QuerySnapshot>(
         future: dataFromFire.where('id', isEqualTo: post_id).get(),
@@ -50,7 +54,7 @@ class _ReportingDialogContentState extends State<ReportingDialogContent> {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: Image.network(
-                            data['post_pic1'],
+                            data[isSale == null ? 'post_pic1' : 'sale_pic1'],
                             width: 600,
                             height: 300,
                             fit: BoxFit.cover,
@@ -88,19 +92,31 @@ class _ReportingDialogContentState extends State<ReportingDialogContent> {
                         scrollDirection: Axis.horizontal,
                         child: Row(
                           children: [
-                            postcard(img: data['post_pic2']),
+                            postcard(
+                                img: data[isSale == null
+                                    ? 'post_pic2'
+                                    : 'sale_pic2']),
                             SizedBox(
                               width: 10.0,
                             ),
-                            postcard(img: data['post_pic3']),
+                            postcard(
+                                img: data[isSale == null
+                                    ? 'post_pic3'
+                                    : 'sale_pic2']),
                             SizedBox(
                               width: 10.0,
                             ),
-                            postcard(img: data['post_pic4']),
+                            postcard(
+                                img: data[isSale == null
+                                    ? 'post_pic4'
+                                    : 'sale_pic4']),
                             SizedBox(
                               width: 10.0,
                             ),
-                            postcard(img: data['post_pic5']),
+                            postcard(
+                                img: data[isSale == null
+                                    ? 'post_pic5'
+                                    : 'sale_pic5']),
                             SizedBox(
                               width: 10.0,
                             ),
@@ -124,7 +140,7 @@ class _ReportingDialogContentState extends State<ReportingDialogContent> {
                           ),
                         ),
                         Text(
-                          data['contact'],
+                          data['content'],
                           style: TextStyle(
                             fontSize: 23.0,
                           ),

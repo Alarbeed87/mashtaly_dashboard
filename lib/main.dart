@@ -10,9 +10,7 @@ import 'package:mashtaly_dashboard/pages/404/error.dart';
 import 'package:mashtaly_dashboard/pages/authentication/authentication.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'Animations/splash_screen.dart';
-import 'Constants/colors.dart';
 import 'firebase_options.dart';
 import 'routing/routes.dart';
 
